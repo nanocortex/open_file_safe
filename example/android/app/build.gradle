@@ -33,7 +33,7 @@ android {
 
     defaultConfig {
         applicationId "com.crazecoder.openfileexample"
-        minSdkVersion 33
+        minSdkVersion 28
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
