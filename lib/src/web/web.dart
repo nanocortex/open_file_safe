@@ -4,8 +4,5 @@ import 'dart:async';
 import 'dart:html';
 
 Future<bool> open(String uri) async {
-  return window
-      .resolveLocalFileSystemUrl(uri)
-      .then((_) => true)
-      .catchError((e) => false);
+  return window.resolveLocalFileSystemUrl(uri).then((_) => true).catchError((e) => false);
 }

@@ -14,11 +14,7 @@ class OpenFile {
   OpenFile._();
 
   ///linuxDesktopName like 'xdg'/'gnome'
-  static Future<OpenResult> open(String? filePath,
-      {String? type,
-      String? uti,
-      String linuxDesktopName = "xdg",
-      bool linuxByProcess = false}) async {
+  static Future<OpenResult> open(String? filePath, {String? type, String? uti, String linuxDesktopName = "xdg", bool linuxByProcess = false}) async {
     assert(filePath != null);
     if (!Platform.isIOS && !Platform.isAndroid) {
       int _result;
@@ -28,11 +24,9 @@ class OpenFile {
       } else if (Platform.isLinux) {
         var filePathLinux = Uri.file(filePath!);
         if (linuxByProcess) {
-          _result = Process.runSync('xdg-open', [filePathLinux.toString()])
-              .exitCode;
+          _result = Process.runSync('xdg-open', [filePathLinux.toString()]).exitCode;
         } else {
-          _result = linux.system(
-              ['$linuxDesktopName-open', filePathLinux.toString()]);
+          _result = linux.system(['$linuxDesktopName-open', filePathLinux.toString()]);
         }
       } else if (Platform.isWindows) {
         _windowsResult = windows.shellExecute('open', filePath!);
