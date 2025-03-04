@@ -22,7 +22,8 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 34
+    namespace "com.crazecoder.openfilesafe"
+    compileSdkVersion 35
 
     defaultConfig {
         minSdkVersion 28

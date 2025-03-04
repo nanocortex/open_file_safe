@@ -69,15 +69,23 @@ public class OpenFilePlugin implements MethodCallHandler
     private static final int RESULT_CODE = 0x12;
     private static final String TYPE_STRING_APK = "application/vnd.android.package-archive";
 
-    @Deprecated
-    public static void registerWith(PluginRegistry.Registrar registrar) {
-        OpenFilePlugin plugin = new OpenFilePlugin();
-        plugin.activity = registrar.activity();
-        plugin.context = registrar.context();
-        plugin.channel = new MethodChannel(registrar.messenger(), "open_file_safe");
-        plugin.channel.setMethodCallHandler(plugin);
-        registrar.addRequestPermissionsResultListener(plugin);
-        registrar.addActivityResultListener(plugin);
+    // @Deprecated
+    // public static void registerWith(PluginRegistry.Registrar registrar) {
+    //     OpenFilePlugin plugin = new OpenFilePlugin();
+    //     plugin.activity = registrar.activity();
+    //     plugin.context = registrar.context();
+    //     plugin.channel = new MethodChannel(registrar.messenger(), "open_file_safe");
+    //     plugin.channel.setMethodCallHandler(plugin);
+    //     registrar.addRequestPermissionsResultListener(plugin);
+    //     registrar.addActivityResultListener(plugin);
+    // }
+
+  @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+        this.flutterPluginBinding = binding;
+      this.context = binding.getApplicationContext();
+      this.channel = new MethodChannel(binding.getBinaryMessenger(), "open_file_safe");
+      this.channel.setMethodCallHandler(this);
     }
 
     private boolean hasPermission(String permission) {
@@ -420,10 +428,10 @@ public class OpenFilePlugin implements MethodCallHandler
         }
     }
 
-    @Override
-    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
-        this.flutterPluginBinding = binding;
-    }
+//    @Override
+//    public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+//        this.flutterPluginBinding = binding;
+//    }
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
